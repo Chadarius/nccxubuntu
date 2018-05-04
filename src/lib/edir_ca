@@ -1,0 +1,15 @@
+edir_ca () {
+	# Download the NCC Organization CA certificate
+
+	#ldapsearch -x -H ldaps://servername.com/ -b 'cn=Organizational CA,cn=Security'
+
+	ldapsearch  -x -LLL -H ldap://${caserver}/ -b "${certdn}" cACertificate \
+	| grep -v "dn:" \
+	| sed "s/cACertificate:://g" \
+	| sed 's/ //g' \
+	| openssl base64 -d \
+	| openssl x509 -inform der -out /etc/ssl/certs/$CERTNAME -outform pem
+
+	echo "You can test TLS by using this command"
+	echo "ldapsearch -x -H ldaps://${caserver}/ -b '${certdn}' '(objectclass=*)'"
+}

@@ -1,0 +1,17 @@
+# Setup Logging for a bash script 
+# Must pass a logfile name
+# typically would create the variable using basename "$0"
+
+logging () {
+	if [ -z $1 ]; then
+		echo "No log file name specified in logging () function"
+		exit 1
+	fi
+	LOG_FILE="/var/log/${1}.log"
+	echo
+	echo "====================================================================="
+	echo "Log file started at ${LOG_FILE}"
+	exec > >(tee -a ${LOG_FILE} )
+	exec 2> >(tee -a ${LOG_FILE} >&2)
+	echo $(date +"%F-%T")
+}
