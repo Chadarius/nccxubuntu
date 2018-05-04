@@ -30,7 +30,20 @@ echo "NTP=time.nccnet.noctrl.edu" |sudo tee -a /etc/systemd/timesyncd.conf
 sudo apt-get update
 sudo apt-get upgrade -y
 
-sudo apt-get install build-essential debconf-utils checkinstall dh-make fakeroot git devscripts libxml-parser-perl cdbs avahi-daemon check cvs subversion git-core git mercurial linux-headers-$(uname -r) open-vm-tools aptitude curl p7zip-rar zip unzip rar unrar uudeview p7zip mpack lhasa arj cabextract file-roller ldap-utils sssd sssd-ldap sssd-tools libpam-mount openjdk-8-jre openjdk-8-jdk ant ivy cifs-utils zerofree davfs2 lvm2 -y
+sudo apt-get install build-essential debconf-utils checkinstall dh-make \
+	fakeroot git devscripts libxml-parser-perl cdbs avahi-daemon \
+	check cvs subversion git-core git gparted mercurial \
+	linux-headers-$(uname -r) open-vm-tools aptitude curl p7zip-rar zip \
+	unzip rar unrar uudeview p7zip mpack lhasa arj cabextract \
+	file-roller ldap-utils sssd sssd-ldap sssd-tools libpam-mount \
+	openjdk-8-jre openjdk-8-jdk ant ivy cifs-utils zerofree davfs2 lvm2 \
+	-y
+
+# Install Oracle Java
+sudo add-apt-repository ppa:webupd8team/java -y
+sudo apt-get update
+sudo apt-get install oracle-java8-installer -y
+sudo apt-get install oracle-java8-set-default
 
 # Update ldap.conf
 
@@ -265,5 +278,18 @@ sudo sed -i '$ a PasswordAuthentication yes' /etc/ssh/ssh_config
 # Update PAM files
 sudo DEBIAN_FRONTEND=noninteractive pam-auth-update
 sudo service sssd restart
+
+#Configure Login Screen
+echo Configure LightDM Login Screen
+
+lightdmncc=$(cat <<EOF
+[SeatDefaults]
+greeter-hide-users=true
+greeter-show-manual-login=true
+allow-guest=false
+EOF
+)
+
+echo -e "${lightdmncc}" |sudo tee /etc/lightdm/lightdm.conf.d/50-ncc-custom-config.conf
 
 
