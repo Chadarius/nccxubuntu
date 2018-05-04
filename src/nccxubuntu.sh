@@ -28,9 +28,10 @@ echo "NTP=time.nccnet.noctrl.edu" |sudo tee -a /etc/systemd/timesyncd.conf
 
 # Update repos and packages
 sudo apt-get update
-sudo apt-get upgrade -y
+#sudo apt-get upgrade -y
+sudo DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" upgrade
 
-sudo apt-get install build-essential debconf-utils checkinstall dh-make \
+sudo DEBIAN_FRONTEND=noninteractive apt-get install build-essential debconf-utils checkinstall dh-make \
 	fakeroot git devscripts libxml-parser-perl cdbs avahi-daemon \
 	check cvs subversion git-core git gparted mercurial \
 	linux-headers-$(uname -r) open-vm-tools aptitude curl p7zip-rar zip \
@@ -41,9 +42,8 @@ sudo apt-get install build-essential debconf-utils checkinstall dh-make \
 
 # Install Oracle Java
 sudo add-apt-repository ppa:webupd8team/java -y
-sudo apt-get update
-sudo apt-get install oracle-java8-installer -y
-sudo apt-get install oracle-java8-set-default
+sudo DEBIAN_FRONTEND=noninteractive apt-get install oracle-java8-installer -y
+sudo DEBIAN_FRONTEND=noninteractive apt-get install oracle-java8-set-default
 
 # Update ldap.conf
 
@@ -78,8 +78,8 @@ reconnection_retries = 3
 [pam]
 reconnection_retries = 3
 [domain/default]
-ldap_uri = ${ldap_uri}
-ldap_search_base = ${ldap_search_base}
+ldap_uri = $ldap_uri
+ldap_search_base = $ldap_search_base
 ldap_schema = rfc2307bis
 id_provider = ldap
 ldap_user_uuid = entryuuid
@@ -88,18 +88,18 @@ ldap_id_use_start_tls = True
 enumerate = False
 cache_credentials = True
 ldap_tls_cacertdir = /etc/ssl/certs/
-ldap_tls_cacert = ${ldap_tls_cacert}
+ldap_tls_cacert = $ldap_tls_cacert
 ldap_tls_reqcert = demand
 chpass_provider = ldap
 auth_provider = ldap
 ldap_user_member_of = groupMembership
 ldap_group_member = member
 access_provider = simple
-simple_allow_groups = ${simple_allow_groups}
-ldap_user_search_base = ${ldap_user_search_base}
-ldap_default_bind_dn = ${ldap_default_bind_dn}
+simple_allow_groups = $simple_allow_groups
+ldap_user_search_base = $ldap_user_search_base
+ldap_default_bind_dn = $ldap_default_bind_dn
 ldap_default_authtok_type = password
-ldap_default_authtok = ${ldap_default_authtok}
+ldap_default_authtok = $ldap_default_authtok
 EOF
 )
 # end of sssd.conf as variable
