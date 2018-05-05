@@ -33,7 +33,7 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confd
 
 sudo DEBIAN_FRONTEND=noninteractive apt-get install build-essential debconf-utils checkinstall dh-make \
 	fakeroot git devscripts libxml-parser-perl cdbs avahi-daemon \
-	check cvs subversion git-core git gparted mercurial \
+	check cvs subversion git-core git gparted gksu mercurial \
 	linux-headers-$(uname -r) nano open-vm-tools aptitude curl p7zip-rar zip \
 	unzip rar unrar uudeview p7zip mpack lhasa arj cabextract \
 	file-roller ldap-utils sssd sssd-ldap sssd-tools libpam-mount \
@@ -41,9 +41,9 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get install build-essential debconf-util
 	-y
 
 # Install Oracle Java
-sudo add-apt-repository ppa:webupd8team/java -y
-sudo DEBIAN_FRONTEND=noninteractive apt-get install oracle-java8-installer -y
-sudo DEBIAN_FRONTEND=noninteractive apt-get install oracle-java8-set-default
+#sudo add-apt-repository ppa:webupd8team/java -y
+#sudo DEBIAN_FRONTEND=noninteractive apt-get install oracle-java8-installer -y
+#sudo DEBIAN_FRONTEND=noninteractive apt-get install oracle-java8-set-default
 
 # Update ldap.conf
 
