@@ -1,0 +1,23 @@
+source ${script_path}/conf/default.conf
+
+# Setup ca information from eDirectory
+source ${script_path}/conf/edir_ca.conf
+
+# ldap_uri list of common delimmited ldap servers
+# example 
+# ldap_uri="ldap://haldap.nccnet.noctrl.edu, ldap://oesldap01.nccnet.noctrl.edu, ldap://oesldap02.nccnet.noctrl.edu, ldap://oesdsd.nccnet.noctrl.edu"
+ldap_uri="ldap://haldap.nccnet.noctrl.edu, ldap://oesldap01.nccnet.noctrl.edu, ldap://oesldap02.nccnet.noctrl.edu, ldap://oesdsd.nccnet.noctrl.edu"
+# ldap_search_base where to start searching in the tree
+ldap_search_base="ou=napvil,o=NCC"
+# location of the cacert from eDirectory should not need to change this here. 
+# see conf/edir_ca.conf
+ldap_tls_cacert="/etc/ssl/certs/${CERTNAME}"
+# This is remarked out in the config
+# It will limit who can login to just members of the list of groups
+simple_allow_groups="its-sudoers"
+# Where to start searching for users in the tree
+ldap_user_search_base="ou=Napvil,o=NCC"
+# ldap_default_bind_dn is FQN of a user that has read only to the search base OU
+ldap_default_bind_dn="cn=readonlyuser,ou=someusercontainer,ou=Napvil,o=NCC"
+# ldap_default_authtok is the password for the above read only ldap user
+ldap_default_authtok="PassWordHere"

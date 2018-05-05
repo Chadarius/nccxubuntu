@@ -1,0 +1,12 @@
+# Change these variables as needed in your environment
+
+#Server to attach to with ldapsearch
+#caserver="edir.ldap.server.edu"
+caserver="oesldap01.nccnet.noctrl.edu"
+
+#Distinguished name for CA Cert in eDir
+#certdn="cn=NameOfCACertHere,cn=Security"
+certdn="cn=NCC Organizational CA,cn=Security"
+
+#The file name you want the cert exported as
+CERTNAME="NCC-Organizational-CA.pem"

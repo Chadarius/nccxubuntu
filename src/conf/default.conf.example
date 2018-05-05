@@ -1,0 +1,11 @@
+# Place config variables here that should belong in all of the sles-oes scripts
+
+# Make sure your script grabs all the functions in ./lib! Otherwise some of this won't work
+# Best to start with template-script.sh so you don't forget this.
+
+# Call logging function
+logging "${script_name}"
+
+# Default email
+default_email="youremail@example.com"
+

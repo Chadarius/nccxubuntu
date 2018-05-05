@@ -34,7 +34,7 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confd
 sudo DEBIAN_FRONTEND=noninteractive apt-get install build-essential debconf-utils checkinstall dh-make \
 	fakeroot git devscripts libxml-parser-perl cdbs avahi-daemon \
 	check cvs subversion git-core git gparted mercurial \
-	linux-headers-$(uname -r) open-vm-tools aptitude curl p7zip-rar zip \
+	linux-headers-$(uname -r) nano open-vm-tools aptitude curl p7zip-rar zip \
 	unzip rar unrar uudeview p7zip mpack lhasa arj cabextract \
 	file-roller ldap-utils sssd sssd-ldap sssd-tools libpam-mount \
 	openjdk-8-jre openjdk-8-jdk ant ivy cifs-utils zerofree davfs2 lvm2 \
@@ -95,7 +95,7 @@ auth_provider = ldap
 ldap_user_member_of = groupMembership
 ldap_group_member = member
 access_provider = simple
-simple_allow_groups = $simple_allow_groups
+#simple_allow_groups = $simple_allow_groups
 ldap_user_search_base = $ldap_user_search_base
 ldap_default_bind_dn = $ldap_default_bind_dn
 ldap_default_authtok_type = password

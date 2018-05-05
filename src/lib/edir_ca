@@ -2,7 +2,10 @@ edir_ca () {
 	# Download the NCC Organization CA certificate
 
 	#ldapsearch -x -H ldaps://servername.com/ -b 'cn=Organizational CA,cn=Security'
-
+	echo caserver is ${caserver}
+	echo certdn is ${certdn}
+	echo CERTNAME is $CERTNAME
+	
 	ldapsearch  -x -LLL -H ldaps://${caserver}/ -b "${certdn}" cACertificate \
 	| grep -v "dn:" \
 	| sed "s/cACertificate:://g" \
